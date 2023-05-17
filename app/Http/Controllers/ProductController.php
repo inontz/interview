@@ -13,7 +13,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+                $blogs = Blog::all();
+        return $this->sendResponse(BlogResource::collection($blogs), 'Posts fetched.');
     }
 
     /**
