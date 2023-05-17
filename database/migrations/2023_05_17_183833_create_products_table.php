@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->text('description');
@@ -19,6 +20,7 @@ return new class extends Migration
             $table->string('pic_url')->nullable();
             $table->integer('instock')->defaultValue('0');
             $table->timestamps();
+            });
     }
 
     /**
