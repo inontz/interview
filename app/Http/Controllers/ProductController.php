@@ -2,19 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Http\Resources\ProductResource;
+use App\Models\Product;
 
-class ProductController extends Controller
+class ProductController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
-                $blogs = Blog::all();
-        return $this->sendResponse(BlogResource::collection($blogs), 'Posts fetched.');
+
+        return ProductResource::collection(Product::with(['category', 'user'])->paginate(25));
+
+
     }
 
     /**
@@ -38,7 +42,11 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        $product = Product::find($id);
+        if (is_null($product)) {
+            return $this->sendError('Product does not exist.');
+        }
+        return $this->sendResponse(new ProductResource($product), 'Product fetched.');
     }
 
     /**

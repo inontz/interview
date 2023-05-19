@@ -4,13 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Order_items;
 
-class Order extends Model
+class Categories extends Model
 {
     use HasFactory;
-    public function order_item()
+    public function product()
     {
-      return $this->hasMany(Order_items::class);
+      return $this->hasMany(Product::class);
     }
 }

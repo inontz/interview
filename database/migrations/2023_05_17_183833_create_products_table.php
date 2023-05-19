@@ -15,12 +15,16 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
+            $table->unsignedBigInteger('category_id');
             $table->float('price')->nullable();
-            $table->string('url')->nullable();
-            $table->string('pic_url')->nullable();
+            $table->longText('url')->nullable();
+            $table->longText('pic_url')->nullable();
             $table->integer('instock')->defaultValue('0');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
-            });
+        });
     }
 
     /**
