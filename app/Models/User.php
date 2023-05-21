@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Models\Product;
-use App\Models\Order;
 
 class User extends Authenticatable
 {
@@ -24,7 +22,9 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
-        'google_id'
+        'provider',
+        'provider_id',
+        'avatar',
     ];
 
     /**
@@ -49,11 +49,11 @@ class User extends Authenticatable
 
     public function product()
     {
-      return $this->hasMany(Product::class);
+        return $this->hasMany(Product::class);
     }
 
     public function order()
     {
-      return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class);
     }
 }

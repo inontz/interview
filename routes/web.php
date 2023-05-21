@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\OAuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,5 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
-Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+Route::controller(OAuthController::class)->group(function () {
+    Route::get('auth/{provider}', 'redirectToProvider')->name('auth.oauth');
+    Route::get('auth/{provider}/callback', 'handleProviderCallback');
+});

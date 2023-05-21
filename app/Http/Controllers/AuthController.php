@@ -38,7 +38,7 @@ class AuthController extends BaseController
 
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
-        $input['role'] = 1;
+        $input['role'] = 'admin';
         $user = User::create($input);
         $success['access_token'] = $user->createToken($input['name'], ['admin'])->plainTextToken;
         $success['token_type'] = 'Bearer';
@@ -62,7 +62,7 @@ class AuthController extends BaseController
 
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
-        $input['role'] = 2;
+        $input['role'] = 'editor';
         $user = User::create($input);
         $success['access_token'] = $user->createToken($input['name'], ['editor'])->plainTextToken;
         $success['token_type'] = 'Bearer';
@@ -86,7 +86,7 @@ class AuthController extends BaseController
 
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
-        $input['role'] = 3;
+        $input['role'] = 'viewer';
         $user = User::create($input);
         $success['access_token'] = $user->createToken($input['name'], ['viewer'])->plainTextToken;
         $success['token_type'] = 'Bearer';
