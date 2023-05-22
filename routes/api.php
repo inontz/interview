@@ -32,4 +32,4 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 Route::get('/all', function () {
     return ProductResource::collection(Product::all());
 });
-Route::resource('product', ProductController::class);
+Route::resource('product', ProductController::class)->middleware('log.route');

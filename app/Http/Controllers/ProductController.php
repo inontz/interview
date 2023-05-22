@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Library\Cacher;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Http\Resources\ProductResource;
@@ -12,12 +13,17 @@ class ProductController extends BaseController
     /**
      * Display a listing of the resource.
      */
+    private $cacher;
+
+    public function __construct()
+    {
+        $this->cacher = new Cacher('redis');
+    }
 
     public function index()
     {
 
         return ProductResource::collection(Product::with(['category', 'user'])->paginate(25));
-
 
     }
 
@@ -40,13 +46,23 @@ class ProductController extends BaseController
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function show($id)
     {
+
+        $cachedData = $this->cacher->getCached('product_'.$id);
+        if ($cachedData) {
+            $product = $cachedData;
+        } else {
+            $product = new ProductResource(Product::find($id));
+            $this->cacher->setCached('product_'.$id, $product->toJson());
+        }
         $product = Product::find($id);
         if (is_null($product)) {
             return $this->sendError('Product does not exist.');
         }
+
         return $this->sendResponse(new ProductResource($product), 'Product fetched.');
+
     }
 
     /**
