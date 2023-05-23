@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-
 class Product extends BaseModel
 {
     use HasFactory;
@@ -13,9 +12,11 @@ class Product extends BaseModel
         'name',
         'description',
         'price',
+        'category_id',
         'url',
         'pic_url',
         'instock',
+        'user_id',
     ];
 
     public function order_item()

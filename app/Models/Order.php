@@ -3,14 +3,23 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use App\Models\Order_items;
 
-class Order extends Model
+class Order extends BaseModel
 {
     use HasFactory;
+
+    protected $fillable = [
+        'order_number',
+        'user_id',
+        'summary_price',
+        'item_count',
+        'phone',
+        'address',
+        'tax_address',
+    ];
+
     public function order_item()
     {
-      return $this->hasMany(Order_items::class);
+        return $this->hasMany(Order_items::class);
     }
 }

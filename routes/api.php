@@ -1,9 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\OrderItemController;
+use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ProductController;
-use App\Http\Resources\ProductResource;
-use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,11 +24,10 @@ Route::prefix('signup')->group(function () {
 
 Route::post('/signin', [AuthController::class, 'signin']);
 
-Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware(['auth:sanctum', 'log.route'])->group(function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+    Route::apiResource('product', ProductController::class);
+    Route::apiResource('order', OrderItemController::class);
 });
-
-Route::get('/all', function () {
-    return ProductResource::collection(Product::all());
-});
-Route::resource('product', ProductController::class)->middleware('log.route');
