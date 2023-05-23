@@ -12,6 +12,7 @@ class Order_item extends BaseModel
 
     protected $fillable = [
         'order_number',
+        'user_id',
         'product_id',
         'price',
         'quantity',
@@ -25,5 +26,9 @@ class Order_item extends BaseModel
     public function product()
     {
       return $this->belongsTo(Product::class);
+    }
+    public function user()
+    {
+      return $this->belongsTo(User::class);
     }
 }

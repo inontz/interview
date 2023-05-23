@@ -20,6 +20,6 @@ class Order extends BaseModel
 
     public function order_item()
     {
-        return $this->hasMany(Order_items::class);
+        return $this->hasMany(Order_item::class);
     }
 }

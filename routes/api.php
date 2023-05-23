@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\OrderItemController;
+use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
@@ -30,4 +31,5 @@ Route::middleware(['auth:sanctum', 'log.route'])->group(function () {
     });
     Route::apiResource('product', ProductController::class);
     Route::apiResource('order', OrderItemController::class);
+    Route::apiResource('checkout', OrderController::class);
 });

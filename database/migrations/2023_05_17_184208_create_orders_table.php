@@ -17,12 +17,12 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->float('summary_price');
             $table->integer('item_count');
-            $table->string('phone');
-            $table->longtext('address');
+            $table->bigInteger('phone_number')->nullable();
+            $table->longtext('address')->nullable();
             $table->longtext('tax_address')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
-            });
+        });
     }
 
     /**
