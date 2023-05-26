@@ -75,6 +75,7 @@ class OrderItemController extends Controller
         $this->cacher->setCached('ordered_'.$order->id, $order->toJson());
 
         Log::info("Order number {$order_number} created successfully. Please check out for more information");
+
         $order_list = Order::where('order_number', $order_number)->paginate();
 
         return (new OrderCollection($order_list))->response()->setStatusCode(Response::HTTP_CREATED);

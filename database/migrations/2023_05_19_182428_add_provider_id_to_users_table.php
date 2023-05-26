@@ -25,8 +25,8 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('provider_id');
-            $table->string('provider')->nullable();
-            $table->text('avatar')->nullable();
+            $table->dropColumn('provider');
+            $table->dropColumn('avatar');
         });
     }
 };

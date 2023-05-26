@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
+use App\Events\OrderSaved;
 
 class Order extends BaseModel
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
 
     protected $fillable = [
         'order_number',
@@ -16,6 +18,11 @@ class Order extends BaseModel
         'phone',
         'address',
         'tax_address',
+        'status',
+    ];
+
+    protected $dispatchesEvents = [
+        'saved' => OrderSaved::class,
     ];
 
     public function order_item()

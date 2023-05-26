@@ -37,27 +37,7 @@ class OrderController extends Controller
      */
     public function store(Request $request): JsonResponse
     {
-        $user = Auth::user();
-        $request->validate([
-            'phone' => 'required|number|phone_number',
-            'address' => 'required|long|address',
-            'tax_address' => 'long|address',
-        ]);
-
-        $product = new Product();
-
-        $product->name = $request->input('name');
-        $product->description = $request->input('description');
-        $product->category_id = $request->input('category_id');
-        $product->price = $request->input('price');
-        $product->instock = $request->input('instock');
-        $product->user_id = $user->id;
-        $product->save();
-        $this->cacher->setCached('product_'.$product->id, $product->toJson());
-
-        Log::info("Product ID {$product->name} created successfully.");
-
-        return (new ProductResource($product))->response()->setStatusCode(Response::HTTP_CREATED);
+        //
     }
 
     /**

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\OAuthController;
+use App\Jobs\OrderToAdminJob;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,4 +22,13 @@ Route::get('/', function () {
 Route::controller(OAuthController::class)->group(function () {
     Route::get('auth/{provider}', 'redirectToProvider')->name('auth.oauth');
     Route::get('auth/{provider}/callback', 'handleProviderCallback');
+});
+
+Route::get('email-test', function () {
+
+    $details['email'] = 'ch.khunanon@gmail.com';
+
+    dd($details);
+    dispatch(new OrderToAdminJob($details));
+
 });
