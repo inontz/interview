@@ -9,7 +9,7 @@ use Validator;
 
 class AuthController extends BaseController
 {
-    public function signin(Request $request)
+    public function login(Request $request)
     {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $authUser = Auth::user();
@@ -23,7 +23,7 @@ class AuthController extends BaseController
         }
     }
 
-    public function signupAdmin(Request $request)
+    public function register_admin(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
@@ -47,7 +47,7 @@ class AuthController extends BaseController
         return $this->sendResponse($success, 'Admin created successfully.');
     }
 
-    public function signupEditor(Request $request)
+    public function register_editor(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
@@ -71,7 +71,7 @@ class AuthController extends BaseController
         return $this->sendResponse($success, 'Editor created successfully.');
     }
 
-    public function signupViewer(Request $request)
+    public function register_viewer(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
@@ -87,6 +87,8 @@ class AuthController extends BaseController
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $input['role'] = 'viewer';
+        $input['address'] = $request->address;
+        $input['tax_address'] = $request->tax_address;
         $user = User::create($input);
         $success['access_token'] = $user->createToken($input['name'], ['viewer'])->plainTextToken;
         $success['token_type'] = 'Bearer';

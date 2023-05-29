@@ -18,6 +18,11 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('role', ['admin', 'editor', 'viewer', 'customer'])->defaultValue('viewer');
+            $table->string('provider_id')->nullable();
+            $table->string('provider')->nullable();
+            $table->text('avatar')->nullable();
+            $table->longText('address')->nullable();
+            $table->longText('tax_address')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

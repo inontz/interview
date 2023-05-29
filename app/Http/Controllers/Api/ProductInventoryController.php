@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\OrderItem;
+use App\Models\ProductInventory;
 use Illuminate\Http\Request;
 
-class OrderItemController extends Controller
+class ProductInventoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,7 +26,7 @@ class OrderItemController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(OrderItem $orderItem)
+    public function show(ProductInventory $productInventory)
     {
         //
     }
@@ -34,7 +34,7 @@ class OrderItemController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, OrderItem $orderItem)
+    public function update(Request $request, ProductInventory $productInventory)
     {
         //
     }
@@ -42,7 +42,7 @@ class OrderItemController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(OrderItem $orderItem)
+    public function destroy(ProductInventory $productInventory)
     {
         //
     }

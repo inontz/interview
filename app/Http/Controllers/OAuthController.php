@@ -7,7 +7,7 @@ use Exception;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
-class OAuthController extends BaseController
+class OAuthController extends Controller
 {
     /**
      * Create a new controller instance.

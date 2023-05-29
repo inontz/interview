@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -25,6 +26,8 @@ class User extends Authenticatable
         'provider',
         'provider_id',
         'avatar',
+        'address',
+        'tax_address',
     ];
 
     /**
@@ -47,7 +50,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function product()
+    public function product(): HasMany
     {
         return $this->hasMany(Product::class);
     }
@@ -56,6 +59,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
+
     public function order_item()
     {
         return $this->hasMany(Order_item::class);

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends BaseModel
 {
     use HasFactory;
-    public function product()
+    public function product(): HasMany
     {
       return $this->hasMany(Product::class);
     }

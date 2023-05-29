@@ -1,24 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\Categories;
+use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 
-class CategoriesController extends Controller
+class OrderDetailController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
     {
         //
     }
@@ -34,15 +26,7 @@ class CategoriesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Categories $categories)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Categories $categories)
+    public function show(OrderDetail $orderDetail)
     {
         //
     }
@@ -50,7 +34,7 @@ class CategoriesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Categories $categories)
+    public function update(Request $request, OrderDetail $orderDetail)
     {
         //
     }
@@ -58,7 +42,7 @@ class CategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Categories $categories)
+    public function destroy(OrderDetail $orderDetail)
     {
         //
     }

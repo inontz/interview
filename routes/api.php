@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Api\OrderItemController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\AuthController;
@@ -17,19 +16,18 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::prefix('signup')->group(function () {
-    Route::post('/admin', [AuthController::class, 'signupAdmin']);
-    Route::post('/editor', [AuthController::class, 'signupEditor']);
-    Route::post('/viewer', [AuthController::class, 'signupViewer']);
+Route::prefix('register')->group(function () {
+    Route::post('/admin', [AuthController::class, 'register_admin']);
+    Route::post('/editor', [AuthController::class, 'register_editor']);
+    Route::post('/viewer', [AuthController::class, 'register_viewer']);
 });
 
-Route::post('/signin', [AuthController::class, 'signin']);
+Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware(['auth:sanctum', 'log.route'])->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
     Route::apiResource('product', ProductController::class);
-    Route::apiResource('order', OrderItemController::class);
-    Route::apiResource('checkout', OrderController::class);
+    // Route::apiResource('order', OrderController::class);
 });
