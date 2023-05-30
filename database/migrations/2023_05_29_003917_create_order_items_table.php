@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::create('order_items', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('order_id')->constrained();
-            $table->unsignedBigInteger('product_id')->constrained();
             $table->integer('quantity');
             $table->timestamps();
         });

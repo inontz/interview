@@ -13,6 +13,14 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        Product::factory()->count(30)->create();
+        Product::factory()
+            ->count(1)
+            ->forUser([
+                'role' => 'admin',
+                'role' => 'editor',
+            ])
+            ->hasinventory(1)
+            ->hascategory()
+            ->create();
     }
 }

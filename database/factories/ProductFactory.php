@@ -28,8 +28,6 @@ class ProductFactory extends Factory
             'name' => $this->faker->numerify('Product ###??'),
             'desc' => $this->faker->text,
             'price' => $this->faker->randomFloat(2, 0, 999999),
-            'category_id' => $this->faker->randomElement($catIds),
-            'inventory_id' => $this->faker->randomElement($IntvIds),
         ];
     }
 }

@@ -16,10 +16,21 @@ class Product extends BaseModel
         'price',
         'category_id',
         'inventory_id',
+        'user_id',
     ];
 
     public function category()
     {
         return $this->belongsTo(ProductCategory::class);
+    }
+
+    public function inventory()
+    {
+        return $this->belongsTo(ProductInventory::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

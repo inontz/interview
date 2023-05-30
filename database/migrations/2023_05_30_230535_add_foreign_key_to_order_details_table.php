@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order_details', function (Blueprint $table) {
-            $table->id();
-            $table->decimal('total');
-            $table->string('order_number');
-            $table->timestamps();
+        Schema::table('order_details', function (Blueprint $table) {
+            $table->unsignedBigInteger('user_id')->constrained();
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('order_details');
+        Schema::table('order_details', function (Blueprint $table) {
+            $table->dropColumn('user_id');
+        });
     }
 };

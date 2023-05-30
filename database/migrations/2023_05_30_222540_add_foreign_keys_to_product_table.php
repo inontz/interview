@@ -11,15 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->text('desc')->nullable();
-            $table->decimal('price')->nullable();
+        Schema::table('products', function (Blueprint $table) {
             $table->unsignedBigInteger('category_id')->constrained();
-            $table->unsignedBigInteger('inventory_id')->constrained();
-            $table->timestamps();
-            $table->dateTime('delete_at')->nullable();
+	        $table->unsignedBigInteger('inventory_id')->constrained();
+	        $table->unsignedBigInteger('user_id')->constrained();
         });
     }
 
@@ -28,6 +23,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropColumn('category_id');
+            $table->dropColumn('inventory_id');
+            $table->dropColumn('user_id');
+        });
     }
 };

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Product;
 use App\Models\ProductInventory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -22,8 +23,9 @@ class ProductInventoryFactory extends Factory
     {
         return [
 
-            'quantity' => $this->faker->randomDigit,
-            'product_id' => $this->faker->randomDigit,
+            'quantity' => fake()->randomDigit(),
+            'product_id' => Product::factory(),
+            'user_id' => User::factory(),
 
         ];
     }
