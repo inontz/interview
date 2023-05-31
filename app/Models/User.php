@@ -14,6 +14,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $with = ['address'];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -62,11 +64,6 @@ class User extends Authenticatable
     public function category(): HasMany
     {
         return $this->hasMany(ProductCategory::class);
-    }
-
-    public function inventory(): HasMany
-    {
-        return $this->hasMany(ProductInventory::class);
     }
 
     public function order_items(): HasMany

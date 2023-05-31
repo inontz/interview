@@ -20,10 +20,11 @@ class ProductCategoryFactory extends Factory
      */
     public function definition(): array
     {
+
         return [
             'name' => fake()->word(),
             'desc' => fake()->sentence(),
-            'user_id' => User::factory(),
+            'user_id' => User::whereIn('role', array('role' => 'admin', 'role' => 'editor'))->get()->random()->id,
         ];
     }
 }

@@ -21,8 +21,6 @@ return new class extends Migration
             $table->string('provider_id')->nullable();
             $table->string('provider')->nullable();
             $table->text('avatar')->nullable();
-            $table->longText('address')->nullable();
-            $table->longText('tax_address')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

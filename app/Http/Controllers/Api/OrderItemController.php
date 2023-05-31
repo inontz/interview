@@ -2,15 +2,36 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
+use App\Http\Library\ApiHelpers;
+use App\Http\Library\Cacher;
+use App\Http\Resources\OrderItemCollection;
+use App\Http\Resources\OrderDetailCollection;
+use App\Models\OrderDetail;
 use App\Models\OrderItem;
+use App\Models\Product;
+use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class OrderItemController extends Controller
 {
+
+    use ApiHelpers;
+
+    private $cacher;
+
+    public function __construct()
+    {
+        $this->cacher = new Cacher('redis');
+    }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): JsonResponse
     {
         //
     }
@@ -18,7 +39,7 @@ class OrderItemController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         //
     }
@@ -26,7 +47,7 @@ class OrderItemController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(OrderItem $orderItem)
+    public function show(OrderItem $orderItem): JsonResponse
     {
         //
     }

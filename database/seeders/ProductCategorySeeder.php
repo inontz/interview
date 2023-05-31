@@ -14,12 +14,7 @@ class ProductCategorySeeder extends Seeder
     public function run(): void
     {
         ProductCategory::factory()
-            ->count(1)
-            ->forUser([
-                'role' => 'admin',
-                'role' => 'editor',
-            ])
-            ->forproduct()
+            ->count(20)
             ->create();
     }
 }

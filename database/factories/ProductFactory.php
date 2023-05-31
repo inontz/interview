@@ -5,7 +5,6 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Product;
 use App\Models\ProductCategory;
-use App\Models\ProductInventory;
 use App\Models\User;
 
 /**
@@ -21,13 +20,14 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
-        $catIds = ProductCategory::all()->pluck('id');
-        $IntvIds = ProductInventory::all()->pluck('id');
 
         return [
-            'name' => $this->faker->numerify('Product ###??'),
-            'desc' => $this->faker->text,
-            'price' => $this->faker->randomFloat(2, 0, 999999),
+            'name' => fake()->numerify('product-####'),
+            'desc' => fake()->text(),
+            'price' => fake()->randomFloat(2, 0, 8),
+            'stock' => fake()->randomNumber(),
+            'category_id' => ProductCategory::all()->random()->id,
+            'user_id' => User::whereIn('role', array('role' => 'admin', 'role' => 'editor'))->get()->random()->id,
         ];
     }
 }

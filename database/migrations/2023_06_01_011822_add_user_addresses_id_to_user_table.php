@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_inventories', function (Blueprint $table) {
-            $table->id();
-            $table->integer('quantity')->defaultValue(0);
-            $table->dateTime('delete_at')->nullable();
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->unsignedBigInteger('user_addresses_id')->nullable()->constrained();
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_inventories');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('user_addresses_id');
+        });
     }
 };

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('desc')->nullable();
             $table->decimal('price')->nullable();
+            $table->integer('stock')->defaultValue(0);
             $table->timestamps();
             $table->dateTime('delete_at')->nullable();
         });

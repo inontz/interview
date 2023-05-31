@@ -8,25 +8,20 @@ class Product extends BaseModel
 {
     use HasFactory;
 
-    protected $with = ['category'];
+    protected $with = ['category', 'user'];
 
     protected $fillable = [
         'name',
         'desc',
         'price',
         'category_id',
-        'inventory_id',
+        'stock',
         'user_id',
     ];
 
     public function category()
     {
         return $this->belongsTo(ProductCategory::class);
-    }
-
-    public function inventory()
-    {
-        return $this->belongsTo(ProductInventory::class);
     }
 
     public function user()

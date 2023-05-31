@@ -18,9 +18,6 @@ class UserSeeder extends Seeder
                     ['role' => 'admin'],
                     ['role' => 'editor'],
                 ))
-                ->hasproduct(2)
-                ->hascategory(2)
-                ->hasinventory(2)
                 ->create();
 
         User::factory()->count(15) ->state(new Sequence(
