@@ -81,11 +81,11 @@ class OrderController extends Controller
                     $order->order_item()->createMany($orderItems);
                     $order->total = $total_price;
                     $order->save();
-                    $this->cacher->setCached('order'.$order->id, $order->toJson());
-                    $ordered = OrderDetail::find($order->id)->paginate();
+                    $this->cacher->setCached('order_'.$order->id, $order->toJson());
+                    $ordered = OrderDetail::where('order_number', $order->order_number)->get();
                     Log::info("Order number {$order_number} created successfully.");
 
-                    return (new OrderCollection($order))->response()->setStatusCode(Response::HTTP_CREATED);
+                    return (new OrderCollection($ordered))->response()->setStatusCode(Response::HTTP_CREATED);
                 } else {
                     Log::info('No order to create.');
                     $error['details'] = 'No order to create.';
@@ -106,9 +106,19 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $order_number)
     {
-        //
+        $cachedData = $this->cacher->getCached('order_'.$order_number);
+        if ($cachedData) {
+            $ordered = $cachedData;
+            return response()->json($ordered, 200);
+        } else {
+            $ordered = OrderDetail::where('order_number', $order_number)->get();
+            $this->cacher->setCached('order_'.$order_number, $ordered->toJson());
+            return (new OrderCollection($ordered))->response()->setStatusCode(Response::HTTP_OK);
+        }
+
+
     }
 
     /**

@@ -88,17 +88,15 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product): JsonResponse
+    public function update(Request $request, Product $product)
     {
         $user = Auth::user();
         if ($this->isAdmin($request->user())) {
             $product->name = $request->input('name');
-            $product->description = $request->input('description');
+            $product->desc = $request->input('desc');
             $product->category_id = $request->input('category_id');
             $product->price = $request->input('price');
-            $product->instock = $request->input('instock');
-            $product->url = $request->input('url');
-            $product->pic_url = $request->input('pic_url');
+            $product->stock = $request->input('stock');
         } elseif ($this->isEditor($request->user())) {
             $request->validate([
                 'name' => 'required',
@@ -107,14 +105,24 @@ class ProductController extends Controller
             $product->name = $request->input('name');
             $product->category_id = $request->input('category_id');
         } else {
-            return response(null, Response::HTTP_UNAUTHORIZED);
+            return response(NULL, Response::HTTP_UNAUTHORIZED);
         }
         $product->user_id = $user->id;
         $product->save();
-        $this->cacher->setCached('product_'.$product->id, $product->toJson());
+
+        $cachedData = $this->cacher->getCached('product_'.$product->id);
+
+        if ($cachedData) {
+           $this->cacher->removeCached('product_'.$product->id);
+        } else {
+           $this->cacher->setCached('product_'.$product->id, $product->toJson());
+        }
+
         Log::info("Product ID {$product->id} Update successfully.");
 
-        return (new ProductResource($product))->response();
+        $pd = Product::find($product->id);
+
+        return (new ProductResource($pd))->response();
     }
 
     /**

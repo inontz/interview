@@ -9,7 +9,7 @@ class OrderItem extends BaseModel
 {
     use HasFactory;
 
-    protected $with = ['order_detail', 'product'];
+    protected $with = ['order_detail:order_number'];
 
     protected $fillable = [
         'order_detail_id',
@@ -20,10 +20,5 @@ class OrderItem extends BaseModel
     public function order_detail(): belongsTo
     {
         return $this->belongsTo(OrderDetail::class);
-    }
-
-    public function product(): belongsTo
-    {
-        return $this->belongsTo(Product::class);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Notifications;
 
-use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -14,7 +14,7 @@ class OrderNotify extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    public function __construct(public Order $order)
+    public function __construct(public OrderDetail $order)
     {
         // the order class
 
@@ -30,11 +30,11 @@ class OrderNotify extends Notification implements ShouldQueue
         $user = User::findOrFail($this->order->user_id)->first();
 
         return (new MailMessage)
-            ->subject("New Chirp from {$user->name}")
-            ->greeting("New Chirp from {$user->name}")
-            ->line(Str::limit($this->order, 50))
-            ->action('Go to Chirper', url('/'))
-            ->line('Thank you for using our application!');
+            ->subject("New Order from {$user->email}")
+            ->greeting("New Order from {$user->email}")
+            ->line("Order No.: {$this->order->order_number}")
+            ->action('Order Detail', url('/order/'.$this->order->order_number))
+            ->line(':)');
     }
 
     public function toArray($notifiable)

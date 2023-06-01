@@ -28,4 +28,9 @@ class Product extends BaseModel
     {
         return $this->belongsTo(User::class);
     }
+
+    public function order_item(): HasMany
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 }
